@@ -29,7 +29,7 @@ class DiscoverView extends GetView<DiscoverController> {
                         child: CircularProgressIndicator(),
                       )
                     : _buildNewsListView(discoverController.future),
-                    // : _buildNewsListView(discoverController.future),
+                // : _buildNewsListView(discoverController.future),
               ),
             ),
           ],

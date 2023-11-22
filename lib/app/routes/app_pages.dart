@@ -6,6 +6,12 @@ import '../modules/discover/bindings/discover_binding.dart';
 import '../modules/discover/views/discover_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/login/bindings/login_binding.dart';
+import '../modules/login/views/login_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
+import '../modules/register/bindings/register_binding.dart';
+import '../modules/register/views/register_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -23,6 +29,16 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
+      name: _Paths.REGISTER,
+      page: () => RegisterView(),
+      binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOGIN,
+      page: () => LoginView(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
       name: _Paths.ARTICLE,
       page: () => ArticleView(
         title: '',
@@ -38,6 +54,11 @@ class AppPages {
       name: _Paths.DISCOVER,
       page: () => DiscoverView(),
       binding: DiscoverBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

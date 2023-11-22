@@ -5,9 +5,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// import '../../controller/bottom_nav_controller.dart';
 import '../discover/views/discover_view.dart';
 import '../home/views/home_view.dart';
+import '../profile/views/profile_view.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -70,7 +70,7 @@ class BottomNavBar extends StatelessWidget {
                 //     builder: (_) => ProfileView(),
                 //   ),
                 // );
-                // Get.to(() => ProfileView());
+                Get.to(() => ProfileView());
               },
               icon: const Icon(Icons.person),
             ),

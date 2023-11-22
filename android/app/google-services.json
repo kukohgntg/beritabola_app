@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1035295223541",
+    "project_id": "beritabola-app",
+    "storage_bucket": "beritabola-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035295223541:android:9da71fb40f0e0361f9dfbc",
+        "android_client_info": {
+          "package_name": "com.example.beritabola_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjKupHia-uXAcFlTQb5Jf24Hi4uAIp8hE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
