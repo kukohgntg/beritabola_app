@@ -5,10 +5,15 @@ import '../../../data/api/remote_service.dart';
 import '../../../data/models/news_model.dart';
 
 class DiscoverController extends GetxController {
-  var future = <Article>[].obs;
-  var searchTerm = ''.obs;
-  var isSearching = false.obs;
-  var searchController = TextEditingController();
+  // var future = <Article>[].obs;
+  late RxList<Article> articles;
+
+  RxString searchTerm = ''.obs;
+  var isSearching = true.obs;
+  TextEditingController searchController = TextEditingController();
+  // var searchTerm = ''.obs;
+  // var searchController = TextEditingController();
+
   var categoryItems = [
     "GENERAL",
     "BUSINESS",
@@ -19,17 +24,19 @@ class DiscoverController extends GetxController {
     "TECHNOLOGY",
   ];
 
-  var selectedCategory = "GENERAL".obs;
+  RxString selectedCategory = "GENERAL".obs;
 
   @override
   void onInit() {
+    articles = <Article>[].obs;
+
     getNewsData();
     super.onInit();
   }
 
   Future<void> getNewsData() async {
     final newsAPI = NewsAPI("fdbf840272ef478ca1cda2f65c844b7f");
-    future.value = await newsAPI.getTopHeadlines(
+    articles.value = await newsAPI.getTopHeadlines(
       country: "us",
       query: searchTerm.value,
       category: selectedCategory.value,

@@ -21,15 +21,15 @@ class DiscoverView extends GetView<DiscoverController> {
         minimum: const EdgeInsets.all(15),
         child: Column(
           children: [
-            const _DiscoverNews(),
+            _DiscoverNews(),
             _buildCategories(),
             Expanded(
               child: Obx(
-                () => (discoverController.future.isEmpty)
+                () => (discoverController.articles.isEmpty)
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : _buildNewsListView(discoverController.future),
+                    : _buildNewsListView(discoverController.articles),
                 // : _buildNewsListView(discoverController.future),
               ),
             ),
@@ -46,7 +46,7 @@ class DiscoverView extends GetView<DiscoverController> {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8),
-            child: Obx(() => (discoverController.future.isEmpty)
+            child: Obx(() => (discoverController.articles.isEmpty)
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
@@ -173,9 +173,9 @@ class DiscoverView extends GetView<DiscoverController> {
 }
 
 class _DiscoverNews extends StatelessWidget {
-  const _DiscoverNews({
-    Key? key,
-  }) : super(key: key);
+  final DiscoverController discoverController = Get.put(DiscoverController());
+
+  _DiscoverNews({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -203,15 +203,24 @@ class _DiscoverNews extends StatelessWidget {
             height: 15,
           ),
           TextFormField(
+            controller: discoverController.searchController,
             decoration: InputDecoration(
                 hintText: 'Cari',
                 fillColor: Colors.grey.shade200,
                 filled: true,
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: Colors.grey,
+                // suffixIcon: const Icon(
+                //   Icons.search,
+                //   color: Colors.grey,
+                // ),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    discoverController.searchTerm.value =
+                        discoverController.searchController.text;
+                    discoverController.getNewsData();
+                  },
+                  icon: const Icon(Icons.search),
                 ),
-                suffixIcon: const RotatedBox(
+                prefixIcon: const RotatedBox(
                   quarterTurns: 1,
                   child: Icon(
                     Icons.tune,
