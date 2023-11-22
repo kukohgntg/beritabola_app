@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/news_model.dart';
+import '../../article/views/article_view.dart';
 import '../../widgets/bottom_nav_bar.dart';
 import '../../widgets/image_container.dart';
 import '../controllers/discover_controller.dart';
@@ -45,33 +46,37 @@ class DiscoverView extends GetView<DiscoverController> {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8),
-            child: ElevatedButton(
-              onPressed: () {
-                discoverController.selectedCategory.value =
-                    discoverController.categoryItems[index];
-                discoverController.getNewsData();
-              },
-              // onPressed: () {
-              //   discoverController
-              //       .changeCategory(discoverController.categoryItems[index]);
-              // },
-              style: ButtonStyle(
-                shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0))),
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  discoverController.categoryItems[index] ==
-                          discoverController.selectedCategory.value
-                      ? Colors.black
-                      : Colors.grey,
-                  // discoverController.selectedCategory.value ==
-                  //         discoverController.categoryItems[index]
-                  //     ? Colors.black
-                  //     : Colors.grey,
-                ),
-              ),
-              child: Text(discoverController.categoryItems[index]),
-            ),
+            child: Obx(() => (discoverController.future.isEmpty)
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ElevatedButton(
+                    onPressed: () {
+                      discoverController.selectedCategory.value =
+                          discoverController.categoryItems[index];
+                      discoverController.getNewsData();
+                    },
+                    // onPressed: () {
+                    //   discoverController
+                    //       .changeCategory(discoverController.categoryItems[index]);
+                    // },
+                    style: ButtonStyle(
+                      shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        discoverController.categoryItems[index] ==
+                                discoverController.selectedCategory.value
+                            ? Colors.black
+                            : Colors.grey,
+                        // discoverController.selectedCategory.value ==
+                        //         discoverController.categoryItems[index]
+                        //     ? Colors.black
+                        //     : Colors.grey,
+                      ),
+                    ),
+                    child: Text(discoverController.categoryItems[index]),
+                  )),
           );
         },
         itemCount: discoverController.categoryItems.length,
@@ -95,6 +100,16 @@ class DiscoverView extends GetView<DiscoverController> {
     return InkWell(
       onTap: () {
         // Get.to(DetailsView(url: article.url!));
+        Get.to(
+          () => ArticleView(
+            title: article.title.toString(),
+            description: article.description.toString(),
+            imageUrl: article.urlToImage.toString(),
+            author: article.author.toString(),
+            publishedAt: article.publishedAt.toString(),
+            content: article.content.toString(),
+          ),
+        );
       },
       child: Row(
         children: [
