@@ -270,7 +270,7 @@ class _NewsHeadLine extends StatelessWidget {
                   color: Colors.white,
                 ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             children: [
               TextButton(
@@ -281,7 +281,7 @@ class _NewsHeadLine extends StatelessWidget {
                   uiController.isGridView.value
                       ? 'Switch to List'
                       : 'Switch to Grid',
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             ],

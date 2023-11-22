@@ -1,23 +1,57 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DiscoverController extends GetxController {
-  //TODO: Implement DiscoverController
+import '../../../data/api/remote_service.dart';
+import '../../../data/models/news_model.dart';
 
-  final count = 0.obs;
+class DiscoverController extends GetxController {
+  var future = <Article>[].obs;
+  var searchTerm = ''.obs;
+  var isSearching = false.obs;
+  var searchController = TextEditingController();
+  var categoryItems = [
+    "GENERAL",
+    "BUSINESS",
+    "ENTERTAINMENT",
+    "HEALTH",
+    "SCIENCE",
+    "SPORTS",
+    "TECHNOLOGY",
+  ];
+
+  var selectedCategory = "GENERAL".obs;
+
   @override
   void onInit() {
+    getNewsData();
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> getNewsData() async {
+    final newsAPI = NewsAPI("fdbf840272ef478ca1cda2f65c844b7f");
+    future.value = await newsAPI.getTopHeadlines(
+      country: "us",
+      query: searchTerm.value,
+      category: selectedCategory.value,
+      pageSize: 50,
+    );
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void setSearchTerm(String term) {
+    searchTerm.value = term;
   }
 
-  void increment() => count.value++;
+  void changeCategory(String category) {
+    selectedCategory.value = category;
+    getNewsData();
+  }
+
+  void toggleSearch() {
+    isSearching.value = !isSearching.value;
+    if (!isSearching.value) {
+      searchTerm.value = '';
+      searchController.text = '';
+      getNewsData();
+    }
+  }
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // import '../../controller/bottom_nav_controller.dart';
+import '../discover/views/discover_view.dart';
 import '../home/views/home_view.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -52,7 +53,7 @@ class BottomNavBar extends StatelessWidget {
               //     builder: (_) => const DiscoverView(),
               //   ),
               // );
-              // Get.to(() => const DiscoverView());
+              Get.to(() => DiscoverView());
             },
             icon: const Icon(Icons.search),
           ),
